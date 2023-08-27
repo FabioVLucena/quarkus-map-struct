@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import entity.PeopleEntity;
 import jakarta.transaction.Transactional;
+import repository.PeopleRepository;
 
 @Service
 @Transactional

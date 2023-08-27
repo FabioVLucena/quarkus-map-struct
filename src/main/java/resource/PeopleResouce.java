@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import entity.PeopleEntity;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -25,7 +25,7 @@ public class PeopleResouce {
 
 	private static final Logger log = Logger.getLogger(PeopleResouce.class);
 	
-	@Inject
+	@Autowired
 	private PeopleService peopleService;
 	
 	@POST
@@ -43,6 +43,7 @@ public class PeopleResouce {
 	public Response getAllEnterprises() {
 		List<PeopleEntity> enterpriseEntityList = peopleService.findAllPeople();
 		
+		System.out.println(enterpriseEntityList.size());
 		if (enterpriseEntityList.isEmpty() == false) {
 			return Response.ok(enterpriseEntityList).build();
 		} else {

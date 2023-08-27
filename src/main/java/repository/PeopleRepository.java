@@ -1,4 +1,4 @@
-package service;
+package repository;
 
 import java.util.List;
 
@@ -13,7 +13,5 @@ public interface PeopleRepository extends JpaRepository<PeopleEntity, Long>{
 	List<PeopleEntity> findAll();
 
 	PeopleEntity findPeopleById(Long id);
-	
-	PeopleEntity createPeople(PeopleEntity people);
 	
 }
