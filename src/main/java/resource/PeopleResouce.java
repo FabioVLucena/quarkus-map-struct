@@ -6,7 +6,9 @@ import java.util.Objects;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import dto.PeopleDTO;
 import entity.PeopleEntity;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -18,6 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
 import jakarta.ws.rs.core.UriInfo;
+import mapper.PeopleMapper;
 import service.PeopleService;
 
 @Path("/people")
@@ -27,6 +30,9 @@ public class PeopleResouce {
 	
 	@Autowired
 	private PeopleService peopleService;
+	
+	@Inject
+	private PeopleMapper peopleMapper;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -42,10 +48,10 @@ public class PeopleResouce {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllEnterprises() {
 		List<PeopleEntity> enterpriseEntityList = peopleService.findAllPeople();
-		
-		System.out.println(enterpriseEntityList.size());
+
 		if (enterpriseEntityList.isEmpty() == false) {
-			return Response.ok(enterpriseEntityList).build();
+			List<PeopleDTO> peopleDTOList = peopleMapper.toDtoList(enterpriseEntityList);
+			return Response.ok(peopleDTOList).build();
 		} else {
 			return Response.noContent().build();
 		}
