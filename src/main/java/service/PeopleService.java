@@ -2,28 +2,29 @@ package service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import entity.PeopleEntity;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
-@ApplicationScoped
+@Service
 @Transactional
-public class PeopleService implements PeopleInterface {
+public class PeopleService  {
 
-	@Override
+	@Autowired
+	private PeopleRepository peopleRepository;
+	
 	public List<PeopleEntity> findAllPeople() {
-		return PeopleEntity.listAll();
+		return peopleRepository.findAll();
 	}
 
-	@Override
-	public PeopleEntity findPeopleById(String id) {
-		return PeopleEntity.findById(id);
+	public PeopleEntity findPeopleById(Long id) {
+		return peopleRepository.findPeopleById(id);
 	}
 
-	@Override
-	public PeopleEntity createPeople(@Valid PeopleEntity people) {
-		PeopleEntity.persist(people);
+	public PeopleEntity createPeople(PeopleEntity people) {
+		peopleRepository.save(people);
 		return people;
 	}
 

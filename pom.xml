@@ -33,8 +33,12 @@
       <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-mongodb-rest-data-panache</artifactId>
+        <groupId>io.quarkus</groupId>
+    	<artifactId>quarkus-spring-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.quarkus</groupId>
+    	<artifactId>quarkus-jdbc-h2</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

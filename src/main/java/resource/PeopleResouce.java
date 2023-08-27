@@ -7,7 +7,6 @@ import org.jboss.logging.Logger;
 
 import entity.PeopleEntity;
 import jakarta.inject.Inject;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -32,9 +31,9 @@ public class PeopleResouce {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createEnterprise(@Valid PeopleEntity enterprisePeople, @Context UriInfo uriInfo) {
+	public Response createEnterprise(PeopleEntity enterprisePeople, @Context UriInfo uriInfo) {
 		enterprisePeople = peopleService.createPeople(enterprisePeople);
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(enterprisePeople.id.toString());
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(enterprisePeople.getId().toString());
 		log.info("New people created with URI " + builder.build().toString());
 		return Response.created(builder.build()).build();
 	}
@@ -54,7 +53,7 @@ public class PeopleResouce {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getEnterprise(@PathParam("id") String id) {
+	public Response getEnterprise(@PathParam("id") Long id) {
 		if (Objects.nonNull(id)) {
 			PeopleEntity enterpriseEntity = peopleService.findPeopleById(id);
 			
